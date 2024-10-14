@@ -4909,6 +4909,7 @@ __metadata:
     react-dom: "npm:^18.3.1"
     react-router-dom: "npm:^6.26.2"
     react-scripts: "npm:5.0.1"
+    tailwind-merge: "npm:^2.5.4"
     tailwindcss: "npm:^3.4.13"
     typescript: "npm:^4.9.5"
     web-vitals: "npm:^2.1.4"
@@ -12703,6 +12704,13 @@ __metadata:
   version: 3.2.4
   resolution: "symbol-tree@npm:3.2.4"
   checksum: 10c0/dfbe201ae09ac6053d163578778c53aa860a784147ecf95705de0cd23f42c851e1be7889241495e95c37cabb058edb1052f141387bef68f705afc8f9dd358509
+  languageName: node
+  linkType: hard
+
+"tailwind-merge@npm:^2.5.4":
+  version: 2.5.4
+  resolution: "tailwind-merge@npm:2.5.4"
+  checksum: 10c0/6c3d2a1d44344f373859f005e6366f0dbd7f66131d330a51dbe823dab08f71c388b2efcbb2b6a2170ca469581d27079c25cd40c234ca1356c4893ae99c2febb3
   languageName: node
   linkType: hard
 
