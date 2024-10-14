@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { twMerge } from "tailwind-merge";
 
 type CountUpProps = {
   from?: number;
@@ -16,7 +15,7 @@ const CountUp = ({
   durationInSeconds = 3,
   className,
 }: CountUpProps) => {
-  const [count, setCount] = useState<number>(0);
+  const [count, setCount] = useState<number>(from);
 
   const duration = durationInSeconds * 1000;
 
