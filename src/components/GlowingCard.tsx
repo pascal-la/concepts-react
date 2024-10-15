@@ -31,7 +31,6 @@ const GlowingCard = ({
         <div
           className="absolute rounded-full animate-[glow_linear_infinite]"
           style={{
-            backgroundColor: borderColor,
             boxShadow: `0px 0px 20px 15px ${borderColor}`,
             animationDuration: `${duration}s`,
             animationDirection: `${
