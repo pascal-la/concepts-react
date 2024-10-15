@@ -40,9 +40,10 @@ const CountUpPage = () => {
           explicabo accusamus laboriosam suscipit? Ratione!
         </p>
       </div>
-      <div className="grid md:grid-cols-3 gap-8 md:gap-3">
+      <div className="grid md:grid-cols-3 gap-8 md:gap-5">
         {stats.map((stat, i) => (
           <GlowingCard
+            key={i}
             borderColor="#10B981"
             direction="clockwise"
             backgroundColor="#2b2b2b"
