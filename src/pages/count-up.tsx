@@ -1,4 +1,5 @@
 import CountUp from "../components/CountUp";
+import GlowingCard from "../components/GlowingCard";
 
 const stats = [
   {
@@ -29,8 +30,8 @@ const CountUpPage = () => {
   return (
     <div className="container m-auto">
       <div className="grid gap-5 mt-24 mb-12">
-        <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-emerald-400 to-emerald-700 bg-clip-text text-transparent">
-          Nos chiffres clés
+        <h1 className="text-4xl font-bold text-center bg-gradient-to-r from-emerald-300 to-emerald-800 bg-clip-text text-transparent">
+          Nos réalisations
         </h1>
         <p className="text-slate-400">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur
@@ -41,20 +42,26 @@ const CountUpPage = () => {
       </div>
       <div className="grid md:grid-cols-3 gap-8 md:gap-3">
         {stats.map((stat, i) => (
-          <div className="grid justify-center p-2 gap-5 text-center border border-emerald-400 rounded-lg">
-            <div>
-              <h2 className="mb-3 text-3xl text-emerald-500 font-bold">
-                {stat.title}
-              </h2>
-              <p className="text-slate-400 italic">{stat.subtitle}</p>
+          <GlowingCard
+            borderColor="#10B981"
+            direction="clockwise"
+            backgroundColor="#2b2b2b"
+          >
+            <div className="grid justify-center size-full p-3 gap-5 text-center">
+              <div>
+                <h2 className="mb-3 text-2xl text-emerald-500 font-bold">
+                  {stat.title}
+                </h2>
+                <p className="text-slate-400 italic">{stat.subtitle}</p>
+              </div>
+              <CountUp
+                from={stat.from}
+                to={stat.to}
+                durationInSeconds={i + 1}
+                className="flex justify-center items-end h-full text-3xl text-emerald-400 font-bold"
+              />
             </div>
-            <CountUp
-              from={stat.from}
-              to={stat.to}
-              durationInSeconds={i + 1}
-              className="flex justify-center items-end h-full text-3xl text-emerald-400 font-bold"
-            />
-          </div>
+          </GlowingCard>
         ))}
       </div>
     </div>

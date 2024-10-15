@@ -1,13 +1,9 @@
+import HomePage from "./pages/home-page";
+
 function App() {
   return (
     <div className="bg-slate-700">
-      <h1>Banana</h1>
-      <h1>Banana</h1>
-      <h1>Banana</h1>
-      <h1>Banana</h1>
-      <h1>Banana</h1>
-      <h1>Banana</h1>
-      <h1>Banana</h1>
+      <HomePage />
     </div>
   );
 }
