@@ -25,9 +25,11 @@ const Header = () => {
   ];
 
   return (
-    <header className="absolute top-0 left-0 right-0 flex items-center p-3 gap-3 bg-emerald-600 h-12">
+    <header className="relative top-0 left-0 right-0 flex items-center h-12 p-3 gap-3 bg-emerald-600">
       {links.map((link) => (
-        <Link to={link.path}>{link.name}</Link>
+        <Link key={link.name} to={link.path}>
+          {link.name}
+        </Link>
       ))}
     </header>
   );
