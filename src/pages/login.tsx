@@ -1,18 +1,18 @@
 import { useToastContext } from "../context/ToastContext";
 
 const Login = () => {
-  const { setMessages } = useToastContext();
+  const { messages, setMessages } = useToastContext();
 
   // const addToast = (e: React.MouseEvent) => {
   //   const target = e.target as HTMLElement;
   //   setMessages((prev) => [...prev, target.innerHTML]);
   // };
 
-  const addToast = (message: string) => {
-    setMessages((prev) => [...prev, message]);
+  const addToast = (msg: string) => {
+    setMessages((prev) => [...prev, { id: messages.length + 1, message: msg }]);
   };
 
-  const messages = [
+  const testMessages = [
     ["La famille avant l'oseille", "l'oseille avant les salopes."],
     ["Le monde est à nous", "le monde est à toi et moi."],
     ["Mes sentiments dansent", "la macarena."],
@@ -22,7 +22,7 @@ const Login = () => {
     <div>
       <h1>Login</h1>
       <div className="flex flex-col items-start gap-2">
-        {messages.map((message, i) => (
+        {testMessages.map((message, i) => (
           <div
             key={i}
             onClick={() => addToast(message[1])}
