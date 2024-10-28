@@ -3,7 +3,7 @@ import { useToastContext } from "../context/ToastContext";
 import capitalize from "../utils/capitalize";
 
 const Login = () => {
-  const { messages, setMessages } = useToastContext();
+  const { setMessages } = useToastContext();
 
   // const addToast = (e: React.MouseEvent) => {
   //   const target = e.target as HTMLElement;
@@ -11,12 +11,9 @@ const Login = () => {
   // };
 
   const addToast = (msg: string) => {
-    const findIdMax = messages.map((m) => m.id);
-    const incrementIdMax = Math.max(...findIdMax) + 1;
-    setMessages((prev) => [
-      ...prev,
-      { id: Infinity ? messages.length + 1 : incrementIdMax, message: msg },
-    ]);
+    // const findIdMax = messages.map((m) => m.id);
+    // const incrementIdMax = Math.max(...findIdMax) + 1;
+    setMessages((prev) => [...prev, { id: Date.now(), message: msg }]);
   };
 
   const testMessages = [
@@ -26,7 +23,7 @@ const Login = () => {
   ];
 
   return (
-    <div>
+    <div className="grid gap-8">
       <h1>Login</h1>
       <div className="flex flex-col items-start gap-2">
         {testMessages.map((message, i) => (
@@ -77,7 +74,7 @@ const Login = () => {
         </div>
       </div>
 
-      <div className="flex gap-5 p-8">
+      <div className="flex gap-5">
         <div className="peer size-12 bg-red-500 rounded-full hover:bg-yellow-400 transition-all duration-200 ease-in-out" />
         <div className="size-12 bg-blue-500 rounded-full peer-hover:bg-green-500 transition-all duration-500 ease-in-out" />
       </div>
