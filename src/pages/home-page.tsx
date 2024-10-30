@@ -1,4 +1,3 @@
-import GlowingCard from "../components/GlowingCard";
 import Grid from "../components/Grid";
 
 const HomePage = () => {
@@ -10,3 +9,7 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+// form => input + button => submit => regular
+// form => input + button => submit => while typing + debounce
+// DEBOUNCE
