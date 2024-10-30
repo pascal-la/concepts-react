@@ -1,6 +1,6 @@
 import { useToastContext } from "../context/ToastContext";
 
-import capitalize from "../utils/capitalize";
+import { capitalize } from "../utils/stringUtils";
 
 const Login = () => {
   const { setMessages } = useToastContext();
@@ -25,6 +25,7 @@ const Login = () => {
   return (
     <div className="grid gap-8">
       <h1>Login</h1>
+
       <div className="flex flex-col items-start gap-2">
         {testMessages.map((message, i) => (
           <div
@@ -49,7 +50,7 @@ const Login = () => {
         </p>
       </article>
 
-      <div className="mx-auto p-4 @container w-1/2 border">
+      <div className="mx-auto p-4 @container w-1/2 border bg-yellow-400 sm:bg-sky-400 md:bg-red-400 lg:bg-emerald-400 xl:bg-purple-400 2xl:bg-orange-400">
         <div>
           <div className="xs:block sm:hidden">XS</div>
           <div className="hidden sm:block md:hidden">SM</div>
@@ -66,7 +67,7 @@ const Login = () => {
           <div className="hidden @xl:block @2xl:hidden">XL</div>
           <div className="hidden @2xl:block">2XL</div>
         </div>
-        <div className="text-yellow-400 @sm:text-sky-400 @md:text-red-400 @lg:text-emerald-400 @xl:text-purple-400 @2xl:text-orange-400">
+        <div className="p-5 bg-white text-yellow-400 @sm:text-sky-400 @md:text-red-400 @lg:text-emerald-400 @xl:text-purple-400 @2xl:text-orange-400">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur est
           corporis consectetur explicabo enim laboriosam dicta magnam dolorem a
           dolorum, labore reiciendis officia mollitia architecto magni, numquam
