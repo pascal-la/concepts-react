@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 
-import { useToastContext } from "../context/ToastContext";
+import { useToastContext } from "../../context/ToastContext";
 
 import Toast from "./Toast";
 
 const ToastContainer = () => {
-  const { messages } = useToastContext();
+  const { toasts } = useToastContext();
 
   const [isMounted, setIsMounted] = useState(false);
 
@@ -17,21 +17,21 @@ const ToastContainer = () => {
   }, []);
 
   useEffect(() => {
-    if (!isMounted && messages.length > 0) {
+    if (!isMounted && toasts.length > 0) {
       document.body.appendChild(mountingPoint);
       setIsMounted(true);
     }
 
-    if (isMounted && messages.length === 0) {
+    if (isMounted && toasts.length === 0) {
       document.body.removeChild(mountingPoint);
       setIsMounted(false);
     }
-  }, [isMounted, messages.length, mountingPoint]);
+  }, [isMounted, mountingPoint, toasts.length]);
 
   return createPortal(
     <div className="absolute right-0 flex flex-col items-end gap-2">
-      {messages.map((message) => (
-        <Toast key={message.id} message={message} />
+      {toasts.map((toast) => (
+        <Toast key={toast.id} toast={toast} />
       ))}
     </div>,
     mountingPoint

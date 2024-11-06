@@ -8,6 +8,10 @@ module.exports = {
           from: { opacity: 0 },
           to: { opacity: 1 },
         },
+        decreasingWidth: {
+          from: { width: "100%" },
+          to: { width: 0 },
+        },
         slideInFromRight: {
           from: { opacity: 0, transform: "translateX(100%)" },
           to: { opacity: 1, transform: "translateX(0)" },
@@ -30,10 +34,11 @@ module.exports = {
         },
       },
       animation: {
-        "border-glow": "glow 8s linear infinite",
         "fade-in": "fadeIn 300ms",
+        decreasing: "decreasingWidth linear",
         "slide-in-from-right": "slideInFromRight 300ms",
         "slide-out-to-right": "slideOutToRight 300ms",
+        "border-glow": "glow 8s linear infinite",
       },
     },
   },

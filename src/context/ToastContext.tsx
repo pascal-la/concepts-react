@@ -2,10 +2,12 @@ import { createContext, useContext, useMemo, useState } from "react";
 
 import { Toast } from "../types/types";
 
-import ToastContainer from "../components/ToastContainer";
+import ToastContainer from "../components/toast/ToastContainer";
+
+const DISCARD_TIMEOUT = 290;
 
 type ToastProviderProps = {
-  messages: Toast[];
+  toasts: Toast[];
   addToast: (toast: Toast) => void;
   discardToast: (id: number) => void;
 };
@@ -29,28 +31,28 @@ const defaultToasts = [
 ] as Toast[];
 
 const ToastProvider = ({ children }: { children: React.ReactNode }) => {
-  const [messages, setMessages] = useState(defaultToasts);
+  const [toasts, setToasts] = useState(defaultToasts);
 
   const addToast = (toast: Toast) => {
-    setMessages((prev) => [
-      ...prev,
-      { id: toast.id, message: toast.message, type: toast.type },
-    ]);
+    const { id, message, type, duration } = toast;
+    setToasts((prev) => [...prev, { id, message, type, duration }]);
   };
 
   const discardToast = (id: number) => {
     setTimeout(() => {
-      setMessages((prev) => prev.filter((p) => p.id !== id));
-    }, 290);
+      setToasts((prev) => prev.filter((p) => p.id !== id));
+    }, DISCARD_TIMEOUT);
   };
+
+  const hasToast = toasts.length > 0;
 
   const value = useMemo(
     () => ({
-      messages,
+      toasts,
       addToast,
       discardToast,
     }),
-    [messages]
+    [toasts]
   );
 
   return (

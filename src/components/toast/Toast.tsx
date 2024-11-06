@@ -1,0 +1,67 @@
+import { useCallback, useEffect, useState } from "react";
+import { twMerge } from "tailwind-merge";
+
+import { useToastContext } from "../../context/ToastContext";
+import { Toast as ToastType } from "../../types/types";
+
+import ToastProgress from "./ToastProgress";
+
+const TOAST_DURATION = 5;
+
+const toastType = {
+  success: "bg-emerald-300",
+  error: "bg-yellow-200",
+  danger: "bg-red-300",
+};
+
+type ToastProps = {
+  toast: ToastType;
+};
+
+const Toast = ({ toast }: ToastProps) => {
+  const { discardToast } = useToastContext();
+
+  const [discardAnimation, setDiscardAnimation] = useState<boolean>(false);
+
+  const toastDuration = toast.duration || TOAST_DURATION;
+
+  const onDiscardToast = useCallback(
+    (id: number) => {
+      setDiscardAnimation(true);
+      discardToast(id);
+    },
+    [discardToast]
+  );
+
+  useEffect(() => {
+    const timeout = setTimeout(
+      () => onDiscardToast(toast.id),
+      toastDuration * 1000
+    );
+    return () => clearTimeout(timeout);
+  }, [onDiscardToast, toast.id, toastDuration]);
+
+  return (
+    <div
+      key={toast.id}
+      className={twMerge(
+        "min-w-60 border border-slate-900 bg-sky-300 rounded-md overflow-clip animate-slide-in-from-right",
+        discardAnimation && "animate-slide-out-to-right",
+        toast.type && toastType[toast.type]
+      )}
+    >
+      <div className="flex justify-between p-3">
+        {toast.message}
+        <span
+          className="flex items-start cursor-pointer"
+          onClick={() => onDiscardToast(toast.id)}
+        >
+          x
+        </span>
+      </div>
+      <ToastProgress duration={toastDuration} />
+    </div>
+  );
+};
+
+export default Toast;
