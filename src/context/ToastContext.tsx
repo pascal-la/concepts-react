@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 
 import { Toast } from "../types/types";
 
@@ -6,7 +6,7 @@ import ToastContainer from "../components/ToastContainer";
 
 type ToastProviderProps = {
   messages: Toast[];
-  addToast: (msg: string) => void;
+  addToast: (toast: Toast) => void;
   discardToast: (id: number) => void;
 };
 
@@ -24,15 +24,18 @@ const useToastContext = () => {
 const defaultToasts = [
   { id: 1, message: "Chocolate Chip" },
   { id: 2, message: "Sugar" },
-  { id: 3, message: "Oatmeal" },
-  { id: 4, message: "GingerbreadGingerbread" },
-];
+  { id: 3, message: "Oatmeal", type: "error" },
+  { id: 4, message: "Gingerbread", type: "danger" },
+] as Toast[];
 
 const ToastProvider = ({ children }: { children: React.ReactNode }) => {
-  const [messages, setMessages] = useState<Toast[]>(defaultToasts);
+  const [messages, setMessages] = useState(defaultToasts);
 
-  const addToast = (msg: string) => {
-    setMessages((prev) => [...prev, { id: Date.now(), message: msg }]);
+  const addToast = (toast: Toast) => {
+    setMessages((prev) => [
+      ...prev,
+      { id: toast.id, message: toast.message, type: toast.type },
+    ]);
   };
 
   const discardToast = (id: number) => {

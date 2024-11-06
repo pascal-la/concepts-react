@@ -25,8 +25,8 @@ const ToastContainer = () => {
 
   return createPortal(
     <div className="absolute right-0 flex flex-col items-end gap-2">
-      {messages.map((message, i) => (
-        <Toast key={i} message={message} />
+      {messages.map((message) => (
+        <Toast key={message.id} message={message} />
       ))}
     </div>,
     mountingPoint

@@ -7,10 +7,9 @@ import { Toast as ToastType } from "../types/types";
 
 type ToastProps = {
   message: ToastType;
-  type?: "success" | "error" | "danger";
 };
 
-const Toast = ({ message, type = "success" }: ToastProps) => {
+const Toast = ({ message }: ToastProps) => {
   const { discardToast } = useToastContext();
 
   // const [discardAnimation, setDiscardAnimation] = useState<boolean>(false);
@@ -40,9 +39,9 @@ const Toast = ({ message, type = "success" }: ToastProps) => {
     // >
     <div
       className={twMerge(
-        // "flex justify-between p-3 min-w-60 border border-slate-900 rounded-md animate-slide-in-from-right",
-        "flex justify-between p-3 min-w-60 border border-slate-900 rounded-md",
-        toastType[type]
+        "flex justify-between p-3 min-w-60 border border-slate-900 rounded-md animate-slide-in-from-right",
+        // "flex justify-between p-3 min-w-60 border border-slate-900 rounded-md",
+        toastType[message.type || "success"]
       )}
     >
       {message.message}

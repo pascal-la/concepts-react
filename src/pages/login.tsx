@@ -24,6 +24,11 @@ const Login = () => {
     ["Mes sentiments dansent", "la macarena."],
   ];
 
+  const types = ["success", "error", "danger"];
+  const getRandomType = types[
+    Math.floor(Math.random() * types.length)
+  ] as "success";
+
   return (
     <div className="grid gap-8">
       <h1>Login</h1>
@@ -32,7 +37,13 @@ const Login = () => {
         {testMessages.map((message, i) => (
           <div
             key={i}
-            onClick={() => addToast(message[1])}
+            onClick={() =>
+              addToast({
+                id: Date.now(),
+                message: message[1],
+                type: getRandomType,
+              })
+            }
             className="p-2 border border-slate-800 rounded-md cursor-pointer transition-all duration-100 ease-in-out hover:bg-slate-200"
           >
             {message[0]}
