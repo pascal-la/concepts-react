@@ -25,13 +25,10 @@ const Toast = ({ toast }: ToastProps) => {
 
   const toastDuration = toast.duration || TOAST_DURATION;
 
-  const discardToast = useCallback(
-    (id: number) => {
-      setDiscardAnimation(true);
-      onDiscardToast(id);
-    },
-    [onDiscardToast]
-  );
+  const discardToast = (id: number) => {
+    setDiscardAnimation(true);
+    onDiscardToast(id);
+  };
 
   useEffect(() => {
     const timeout = setTimeout(
