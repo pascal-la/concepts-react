@@ -19,15 +19,14 @@ const Login = () => {
   console.log("RENDER LOGIN PAGE");
 
   const testMessages = [
-    [capitalize("la famille avant l'oseille"), "l'oseille avant les salopes."],
+    [
+      capitalize("la famille avant l'oseille"),
+      "l'oseille avant les salopes.",
+      "error",
+    ],
     [capitalize("le monde est à nous"), "le monde est à toi et moi."],
-    ["Mes sentiments dansent", "la macarena."],
+    ["Mes sentiments dansent", "la macarena.", "danger"],
   ];
-
-  const types = ["success", "error", "danger"];
-  const getRandomType = types[
-    Math.floor(Math.random() * types.length)
-  ] as "success";
 
   return (
     <div className="grid gap-8">
@@ -41,7 +40,7 @@ const Login = () => {
               addToast({
                 id: Date.now(),
                 message: message[1],
-                type: getRandomType,
+                type: message[2] as "danger" | "error" | "success",
               })
             }
             className="p-2 border border-slate-800 rounded-md cursor-pointer transition-all duration-100 ease-in-out hover:bg-slate-200"

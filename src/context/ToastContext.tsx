@@ -23,7 +23,7 @@ const useToastContext = () => {
 
 const defaultToasts = [
   { id: 1, message: "Chocolate Chip" },
-  { id: 2, message: "Sugar" },
+  { id: 2, message: "Sugar", type: "success" },
   { id: 3, message: "Oatmeal", type: "error" },
   { id: 4, message: "Gingerbread", type: "danger" },
 ] as Toast[];

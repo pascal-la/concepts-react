@@ -1,5 +1,5 @@
 export type Toast = {
   id: number;
   message: string;
-  type?: "success" | "error" | "danger";
+  type?: "success" | "error" | "danger" | undefined;
 };

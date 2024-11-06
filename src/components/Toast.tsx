@@ -1,9 +1,14 @@
-// import { useState } from "react";
-// import { twMerge } from "tailwind-merge";
+import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { useToastContext } from "../context/ToastContext";
 import { Toast as ToastType } from "../types/types";
+
+const toastType = {
+  success: "bg-emerald-300",
+  error: "bg-yellow-200",
+  danger: "bg-red-300",
+};
 
 type ToastProps = {
   message: ToastType;
@@ -12,42 +17,26 @@ type ToastProps = {
 const Toast = ({ message }: ToastProps) => {
   const { discardToast } = useToastContext();
 
-  // const [discardAnimation, setDiscardAnimation] = useState<boolean>(false);
+  const [discardAnimation, setDiscardAnimation] = useState<boolean>(false);
 
-  // const discardToast = (id: number) => {
-  //   // setDiscardAnimation(true);
-  //   setTimeout(() => {
-  //     setMessages((prev) => prev.filter((p) => p.id !== id));
-  //   }, 290);
-  // };
-
-  const toastType = {
-    success: "bg-emerald-300",
-    error: "bg-yellow-200",
-    danger: "bg-red-300",
+  const onDiscardToast = (id: number) => {
+    setDiscardAnimation(true);
+    discardToast(id);
   };
 
-  console.log(`RENDER ${message.message} TOAST`);
-
   return (
-    // <div
-    //   key={message.id}
-    //   className={twMerge(
-    //     "flex justify-between p-3 min-w-60 border border-slate-900 bg-orange-300 rounded-md animate-slide-in-from-right",
-    //     discardAnimation && "animate-slide-out-to-right"
-    //   )}
-    // >
     <div
+      key={message.id}
       className={twMerge(
-        "flex justify-between p-3 min-w-60 border border-slate-900 rounded-md animate-slide-in-from-right",
-        // "flex justify-between p-3 min-w-60 border border-slate-900 rounded-md",
-        toastType[message.type || "success"]
+        "flex justify-between p-3 min-w-60 border border-slate-900 bg-sky-300 rounded-md animate-slide-in-from-right",
+        discardAnimation && "animate-slide-out-to-right",
+        message.type && toastType[message.type]
       )}
     >
       {message.message}
       <span
         className="flex items-start cursor-pointer"
-        onClick={() => discardToast(message.id)}
+        onClick={() => onDiscardToast(message.id)}
       >
         x
       </span>
