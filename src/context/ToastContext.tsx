@@ -4,12 +4,12 @@ import { Toast } from "../types/types";
 
 import ToastContainer from "../components/toast/ToastContainer";
 
-const DISCARD_TIMEOUT = 290;
+const ANIMATION_DURATION = 290;
 
 type ToastProviderProps = {
   toasts: Toast[];
   addToast: (toast: Toast) => void;
-  discardToast: (id: number) => void;
+  onDiscardToast: (id: number) => void;
 };
 
 const ToastContext = createContext<ToastProviderProps | undefined>(undefined);
@@ -24,10 +24,10 @@ const useToastContext = () => {
 };
 
 const defaultToasts = [
-  { id: 1, message: "Chocolate Chip" },
-  { id: 2, message: "Sugar", type: "success" },
-  { id: 3, message: "Oatmeal", type: "error" },
-  { id: 4, message: "Gingerbread", type: "danger" },
+  { id: 1, message: "Chocolate Chip", duration: 2 },
+  { id: 2, message: "Sugar", type: "success", duration: 3 },
+  { id: 3, message: "Oatmeal", type: "error", duration: 4 },
+  { id: 4, message: "Gingerbread", type: "danger", duration: 5 },
 ] as Toast[];
 
 const ToastProvider = ({ children }: { children: React.ReactNode }) => {
@@ -38,19 +38,17 @@ const ToastProvider = ({ children }: { children: React.ReactNode }) => {
     setToasts((prev) => [...prev, { id, message, type, duration }]);
   };
 
-  const discardToast = (id: number) => {
+  const onDiscardToast = (id: number) => {
     setTimeout(() => {
       setToasts((prev) => prev.filter((p) => p.id !== id));
-    }, DISCARD_TIMEOUT);
+    }, ANIMATION_DURATION);
   };
-
-  const hasToast = toasts.length > 0;
 
   const value = useMemo(
     () => ({
       toasts,
       addToast,
-      discardToast,
+      onDiscardToast,
     }),
     [toasts]
   );

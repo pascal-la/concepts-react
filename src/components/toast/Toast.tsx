@@ -19,33 +19,33 @@ type ToastProps = {
 };
 
 const Toast = ({ toast }: ToastProps) => {
-  const { discardToast } = useToastContext();
+  const { onDiscardToast } = useToastContext();
 
   const [discardAnimation, setDiscardAnimation] = useState<boolean>(false);
 
   const toastDuration = toast.duration || TOAST_DURATION;
 
-  const onDiscardToast = useCallback(
+  const discardToast = useCallback(
     (id: number) => {
       setDiscardAnimation(true);
-      discardToast(id);
+      onDiscardToast(id);
     },
-    [discardToast]
+    [onDiscardToast]
   );
 
   useEffect(() => {
     const timeout = setTimeout(
-      () => onDiscardToast(toast.id),
+      () => discardToast(toast.id),
       toastDuration * 1000
     );
     return () => clearTimeout(timeout);
-  }, [onDiscardToast, toast.id, toastDuration]);
+  }, [discardToast, toast.id, toastDuration]);
 
   return (
     <div
       key={toast.id}
       className={twMerge(
-        "min-w-60 border border-slate-900 bg-sky-300 rounded-md overflow-clip animate-slide-in-from-right",
+        "min-w-60 border border-slate-900 bg-sky-300 rounded-md overflow-clip animate-slide-in-from-right peer/toast",
         discardAnimation && "animate-slide-out-to-right",
         toast.type && toastType[toast.type]
       )}
@@ -54,12 +54,15 @@ const Toast = ({ toast }: ToastProps) => {
         {toast.message}
         <span
           className="flex items-start cursor-pointer"
-          onClick={() => onDiscardToast(toast.id)}
+          onClick={() => discardToast(toast.id)}
         >
           x
         </span>
       </div>
-      <ToastProgress duration={toastDuration} />
+      <ToastProgress
+        duration={toastDuration}
+        className="peer-hover/toast:[animation-play-state:paused]"
+      />
     </div>
   );
 };
