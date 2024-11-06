@@ -11,22 +11,24 @@ type ToastProps = {
 };
 
 const Toast = ({ message, type = "success" }: ToastProps) => {
-  const { setMessages } = useToastContext();
+  const { discardToast } = useToastContext();
 
   // const [discardAnimation, setDiscardAnimation] = useState<boolean>(false);
 
-  const discardToast = (id: number) => {
-    // setDiscardAnimation(true);
-    setTimeout(() => {
-      setMessages((prev) => prev.filter((p) => p.id !== id));
-    }, 290);
-  };
+  // const discardToast = (id: number) => {
+  //   // setDiscardAnimation(true);
+  //   setTimeout(() => {
+  //     setMessages((prev) => prev.filter((p) => p.id !== id));
+  //   }, 290);
+  // };
 
   const toastType = {
     success: "bg-emerald-300",
     error: "bg-yellow-200",
     danger: "bg-red-300",
   };
+
+  console.log("RENDER SINGLE TOAST");
 
   return (
     // <div
@@ -38,7 +40,8 @@ const Toast = ({ message, type = "success" }: ToastProps) => {
     // >
     <div
       className={twMerge(
-        "flex justify-between p-3 min-w-60 border border-slate-900 rounded-md animate-slide-in-from-right",
+        // "flex justify-between p-3 min-w-60 border border-slate-900 rounded-md animate-slide-in-from-right",
+        "flex justify-between p-3 min-w-60 border border-slate-900 rounded-md",
         toastType[type]
       )}
     >

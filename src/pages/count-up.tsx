@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import CountUp from "../components/CountUp";
 import GlowingCard from "../components/GlowingCard";
 
@@ -27,6 +28,13 @@ const stats = [
 ];
 
 const CountUpPage = () => {
+  const [test, setTest] = useState<any>([]);
+
+  useEffect(() => {
+    setTest(stats);
+    return () => setTest([]);
+  }, []);
+
   return (
     <div className="container m-auto">
       <div className="grid gap-5 mt-24 mb-12">
@@ -41,7 +49,7 @@ const CountUpPage = () => {
         </p>
       </div>
       <div className="grid md:grid-cols-3 gap-8 md:gap-5">
-        {stats.map((stat, i) => (
+        {test.map((stat: any, i: any) => (
           <GlowingCard
             key={i}
             borderColor="#10B981"

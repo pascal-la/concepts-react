@@ -22,10 +22,19 @@ export function areAnagrams(str1: string, str2: string): boolean {
 }
 
 export function acronym(str: string): string {
-  const firstLetters = str.split(/-| /).map((s: string) => s[0]);
-  const result = firstLetters.join("").toUpperCase();
+  const words = str.split(/-| /).map((s: string) => s[0]);
+  const result = words.join("").toUpperCase();
   return result;
 }
+
+// export function acronym(str: string): string {
+//   const words = str.split(/-| /);
+//   const result = words.reduce<string[]>((acc, curr) => {
+//     acc.push(curr[0]);
+//     return acc;
+//   }, []);
+//   return result.join("").toUpperCase();
+// }
 
 // export function acronym(str: string): string {
 //   return str
@@ -47,3 +56,87 @@ export function acronym(str: string): string {
 
 //   return result;
 // }
+
+// ===============================================================
+//                              FOR
+// ===============================================================
+
+// const object = {
+//   one: "One",
+//   two: "Two",
+//   three: "Three",
+// };
+
+// const array = ["One", "Two", "Three"];
+
+// const string = "One two three";
+
+// const forObject = () => {
+//   let result = "";
+
+//   for (let i = 0; i < Object.keys(object).length; i++) {
+//     result += Object.values(object)[i];
+//   }
+
+//   return result;
+// };
+
+// const forArray = () => {
+//   let result = "";
+
+//   for (let i = 0; i < array.length; i++) {
+//     result += array[i];
+//   }
+
+//   return result;
+// };
+
+// const forString = () => {
+//   let result = "";
+
+//   for (let i = 0; i < string.length; i++) {
+//     result += string[i];
+//   }
+
+//   return result;
+// };
+
+// console.log(forObject());
+// console.log(forArray());
+// console.log(forString());
+
+// const forInObject = (obj: { [key: string]: string }) => {
+//   let result = "";
+
+//   for (let i in obj) {
+//     result += obj[i];
+//   }
+
+//   return result;
+// };
+
+// console.log(forInObject(object));
+
+// const forOfArray = (arr: string[]) => {
+//   let result = "";
+
+//   for (let i in arr) {
+//     result += arr[i];
+//   }
+
+//   return result;
+// };
+
+// console.log(forOfArray(array));
+
+// const forEachArray = (arr: string[]) => {
+//   let result = "";
+//   arr.forEach((item) => (result += item));
+//   return result;
+// };
+
+// console.log(forEachArray(array));
+
+// ===============================================================
+//
+// ===============================================================

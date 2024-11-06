@@ -3,18 +3,20 @@ import { useToastContext } from "../context/ToastContext";
 import { capitalize } from "../utils/stringUtils";
 
 const Login = () => {
-  const { setMessages } = useToastContext();
+  const { addToast } = useToastContext();
 
   // const addToast = (e: React.MouseEvent) => {
   //   const target = e.target as HTMLElement;
   //   setMessages((prev) => [...prev, target.innerHTML]);
   // };
 
-  const addToast = (msg: string) => {
-    // const findIdMax = messages.map((m) => m.id);
-    // const incrementIdMax = Math.max(...findIdMax) + 1;
-    setMessages((prev) => [...prev, { id: Date.now(), message: msg }]);
-  };
+  // const addToast = (msg: string) => {
+  // const findIdMax = messages.map((m) => m.id);
+  // const incrementIdMax = Math.max(...findIdMax) + 1;
+  // setMessages((prev) => [...prev, { id: Date.now(), message: msg }]);
+  // };
+
+  console.log("RENDER LOGIN PAGE");
 
   const testMessages = [
     [capitalize("la famille avant l'oseille"), "l'oseille avant les salopes."],

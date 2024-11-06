@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 import { Toast } from "../types/types";
 
@@ -6,7 +6,8 @@ import ToastContainer from "../components/ToastContainer";
 
 type ToastProviderProps = {
   messages: Toast[];
-  setMessages: React.Dispatch<React.SetStateAction<Toast[]>>;
+  addToast: (msg: string) => void;
+  discardToast: (id: number) => void;
 };
 
 const ToastContext = createContext<ToastProviderProps | undefined>(undefined);
@@ -28,10 +29,29 @@ const defaultToasts = [
 ];
 
 const ToastProvider = ({ children }: { children: React.ReactNode }) => {
-  const [messages, setMessages] = useState(defaultToasts);
+  const [messages, setMessages] = useState<Toast[]>(defaultToasts);
+
+  const addToast = (msg: string) => {
+    setMessages((prev) => [...prev, { id: Date.now(), message: msg }]);
+  };
+
+  const discardToast = (id: number) => {
+    setTimeout(() => {
+      setMessages((prev) => prev.filter((p) => p.id !== id));
+    }, 290);
+  };
+
+  const value = useMemo(
+    () => ({
+      messages,
+      addToast,
+      discardToast,
+    }),
+    [messages]
+  );
 
   return (
-    <ToastContext.Provider value={{ messages, setMessages }}>
+    <ToastContext.Provider value={value}>
       <ToastContainer />
       {children}
     </ToastContext.Provider>

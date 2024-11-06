@@ -15,11 +15,13 @@ const ToastContainer = () => {
   }, []);
 
   useEffect(() => {
-    if (mountingPoint) document.body.appendChild(mountingPoint);
-    return () => {
-      document.body.removeChild(mountingPoint);
-    };
-  }, [mountingPoint]);
+    if (messages.length > 0) {
+      document.body.appendChild(mountingPoint);
+      return () => {
+        document.body.removeChild(mountingPoint);
+      };
+    }
+  }, [messages, mountingPoint]);
 
   return createPortal(
     <div className="absolute right-0 flex flex-col items-end gap-2">
