@@ -39,7 +39,7 @@ const Toast = ({ toast }: ToastProps) => {
       toastDuration * 1000
     );
     return () => clearTimeout(timeout);
-  }, [discardToast, toast.id, toastDuration]);
+  }, [toast.id, toastDuration]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div
