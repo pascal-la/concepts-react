@@ -27,7 +27,7 @@ const Toast = ({ message }: ToastProps) => {
     danger: "bg-red-300",
   };
 
-  console.log("RENDER SINGLE TOAST");
+  console.log(`RENDER ${message.message} TOAST`);
 
   return (
     // <div
