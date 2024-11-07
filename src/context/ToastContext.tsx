@@ -23,15 +23,15 @@ const useToastContext = () => {
   return context;
 };
 
-const defaultToasts = [
+const defaultToasts: Toast[] = [
   { id: 1, message: "Chocolate Chip", duration: 2 },
   { id: 2, message: "Sugar", type: "success", duration: 5 },
   { id: 3, message: "Oatmeal", type: "error", duration: 4 },
   { id: 4, message: "Gingerbread", type: "danger", duration: 3 },
-] as Toast[];
+];
 
 const ToastProvider = ({ children }: { children: React.ReactNode }) => {
-  const [toasts, setToasts] = useState(defaultToasts);
+  const [toasts, setToasts] = useState<Toast[]>(defaultToasts);
 
   const addToast = (toast: Toast) => {
     const { id, message, type, duration } = toast;
