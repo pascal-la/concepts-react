@@ -16,8 +16,6 @@ const Login = () => {
   // setMessages((prev) => [...prev, { id: Date.now(), message: msg }]);
   // };
 
-  console.log("RENDER LOGIN PAGE");
-
   const testMessages = [
     [
       capitalize("la famille avant l'oseille"),
