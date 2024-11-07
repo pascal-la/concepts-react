@@ -2,7 +2,15 @@ import { useEffect, useState } from "react";
 import CountUp from "../components/CountUp";
 import GlowingCard from "../components/GlowingCard";
 
-const stats = [
+type StatsType = {
+  title: string;
+  subtitle: string;
+  from?: number;
+  to?: number;
+  duration?: number;
+};
+
+const stats: StatsType[] = [
   {
     title: "Voluptatum",
     subtitle:
@@ -28,12 +36,7 @@ const stats = [
 ];
 
 const CountUpPage = () => {
-  const [test, setTest] = useState<any>([]);
-
-  useEffect(() => {
-    setTest(stats);
-    return () => setTest([]);
-  }, []);
+  const [test] = useState<StatsType[]>(stats);
 
   return (
     <div className="container m-auto">
