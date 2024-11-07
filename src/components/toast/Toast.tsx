@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { useToastContext } from "../../context/ToastContext";
@@ -35,6 +35,7 @@ const Toast = ({ toast }: ToastProps) => {
       () => discardToast(toast.id),
       toastDuration * 1000
     );
+
     return () => clearTimeout(timeout);
   }, [toast.id, toastDuration]); // eslint-disable-line react-hooks/exhaustive-deps
 

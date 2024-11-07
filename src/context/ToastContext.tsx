@@ -25,9 +25,9 @@ const useToastContext = () => {
 
 const defaultToasts = [
   { id: 1, message: "Chocolate Chip", duration: 2 },
-  { id: 2, message: "Sugar", type: "success", duration: 3 },
+  { id: 2, message: "Sugar", type: "success", duration: 5 },
   { id: 3, message: "Oatmeal", type: "error", duration: 4 },
-  { id: 4, message: "Gingerbread", type: "danger", duration: 5 },
+  { id: 4, message: "Gingerbread", type: "danger", duration: 3 },
 ] as Toast[];
 
 const ToastProvider = ({ children }: { children: React.ReactNode }) => {
