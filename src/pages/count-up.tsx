@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CountUp from "../components/CountUp";
 import GlowingCard from "../components/GlowingCard";
 
