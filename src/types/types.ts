@@ -1,7 +1,9 @@
+export type ToastVariantType = "success" | "error" | "danger";
+
 export type ToastType = {
   id: number;
   message: string;
-  type?: "success" | "error" | "danger" | undefined;
+  type?: ToastVariantType;
   duration?: number;
 };
 

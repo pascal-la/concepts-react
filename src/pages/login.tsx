@@ -1,6 +1,8 @@
 import { useToastContext } from "../context/ToastContext";
-
+import { ToastVariantType } from "../types/types";
 import { capitalize } from "../utils/stringUtils";
+
+import PageTitle from "../components/PageTitle";
 
 const Login = () => {
   const { addToast } = useToastContext();
@@ -16,36 +18,48 @@ const Login = () => {
   // setMessages((prev) => [...prev, { id: Date.now(), message: msg }]);
   // };
 
-  const testMessages = [
-    [
-      capitalize("la famille avant l'oseille"),
-      "l'oseille avant les salopes.",
-      "error",
-    ],
-    [capitalize("le monde est à nous"), "le monde est à toi et moi."],
-    ["Mes sentiments dansent", "la macarena.", "danger"],
+  const toasts = [
+    {
+      text: capitalize("la famille avant l'oseille"),
+      message: "l'oseille avant les salopes.",
+      type: "error",
+    },
+    {
+      text: capitalize("le monde est à nous"),
+      message: "le monde est à toi et moi.",
+      type: "success",
+    },
+    {
+      text: capitalize("le monde est à nous"),
+      message: "Mes sentiments dansent",
+      type: "danger",
+    },
   ];
 
   return (
-    <div className="grid gap-8">
-      <h1>Login</h1>
+    <div className="container mx-auto mt-3 grid gap-12">
+      <PageTitle text="Login" />
 
       <div className="flex flex-col items-start gap-2">
-        {testMessages.map((message, i) => (
-          <div
-            key={i}
-            onClick={() =>
-              addToast({
-                id: Date.now(),
-                message: message[1],
-                type: message[2] as "danger" | "error" | "success",
-              })
-            }
-            className="p-2 border border-slate-800 rounded-md cursor-pointer transition-all duration-100 ease-in-out hover:bg-slate-200"
-          >
-            {message[0]}
-          </div>
-        ))}
+        {toasts.map((toast, i) => {
+          const { text, message, type } = toast;
+
+          return (
+            <div
+              key={i}
+              onClick={() =>
+                addToast({
+                  id: Date.now(),
+                  message,
+                  type: type as ToastVariantType,
+                })
+              }
+              className="p-2 border border-slate-800 rounded-md cursor-pointer transition-all duration-100 ease-in-out hover:bg-slate-200"
+            >
+              {text}
+            </div>
+          );
+        })}
       </div>
 
       <article className="border border-slate-300 rounded-md p-4 ml-6 w-1/2">

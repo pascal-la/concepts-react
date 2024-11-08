@@ -79,7 +79,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="container mx-auto grid gap-12">
+    <div className="container mx-auto mt-3 grid gap-12">
       <PageTitle text="Contact" />
       <div className="mx-auto max-w-xl w-full p-12 bg-slate-100 border rounded-md">
         <form onSubmit={handleSubmit} className="grid gap-5">
