@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 
 import { InputWithLabelProps } from "../types/types";
+import { emailCheck, isStringNotEmpty } from "../utils/stringUtils";
 
 import Button from "../components/Button";
 import InputWithLabel from "../components/input/InputWithLabel";
@@ -23,11 +24,11 @@ const Contact = () => {
 
   const { username, email, message } = formData;
 
-  const isFormFilled =
-    username.length > 0 &&
-    email.length > 0 &&
-    message.length > 0 &&
-    /\S+@\S+\.\S+/.test(email);
+  const isValidForm =
+    isStringNotEmpty(username) &&
+    isStringNotEmpty(email) &&
+    isStringNotEmpty(message) &&
+    emailCheck(email);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -73,6 +74,7 @@ const Contact = () => {
       id: "message",
       placeholder: "Tapez votre message",
       value: message,
+      rows: 5,
     },
   ];
 
@@ -91,11 +93,12 @@ const Contact = () => {
               placeholder={input.placeholder}
               value={input.value}
               onChange={handleInputChange}
+              rows={input.rows}
               required
               disabled={input.disabled}
             />
           ))}
-          <Button type="submit" disabled={!isFormFilled}>
+          <Button type="submit" disabled={!isValidForm}>
             Valider
           </Button>
         </form>

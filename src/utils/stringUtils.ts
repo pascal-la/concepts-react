@@ -27,6 +27,16 @@ export function acronym(str: string): string {
   return result;
 }
 
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+export function emailCheck(email: string) {
+  return emailRegex.test(email);
+}
+
+export function isStringNotEmpty(str: string) {
+  return str.trim().length > 0;
+}
+
 // export function acronym(str: string): string {
 //   const words = str.split(/-| /);
 //   const result = words.reduce<string[]>((acc, curr) => {

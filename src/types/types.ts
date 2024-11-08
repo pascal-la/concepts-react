@@ -20,6 +20,7 @@ export type InputProps = {
   placeholder: string;
   value?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  rows?: number;
   className?: string;
   required?: boolean;
   disabled?: boolean;
