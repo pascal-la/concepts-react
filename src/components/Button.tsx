@@ -6,6 +6,7 @@ type ButtonProps = {
   variant?: "primary" | "secondary" | "third";
   className?: string;
   children: ReactNode;
+  disabled?: boolean;
 };
 
 const buttonVariant = {
@@ -22,15 +23,17 @@ const Button = ({
   variant = "primary",
   className,
   children,
+  disabled,
 }: ButtonProps) => {
   return (
     <button
       type={type}
       className={twMerge(
-        "rounded-md px-3 py-2 text-sm font-semibold text-white bg-gradient-to-br shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 transition-all duration-500 ease-in-out transform",
+        "rounded-md px-3 py-2 text-sm font-semibold text-white bg-gradient-to-br shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-60  disabled:pointer-events-none",
         buttonVariant[variant],
         className
       )}
+      disabled={disabled}
     >
       {children}
     </button>

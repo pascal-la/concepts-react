@@ -5,7 +5,6 @@ import { InputWithLabelProps } from "../types/types";
 import Button from "../components/Button";
 import InputWithLabel from "../components/input/InputWithLabel";
 import PageTitle from "../components/PageTitle";
-import Input from "../components/input/Input";
 
 type FormData = {
   username: string;
@@ -21,6 +20,12 @@ const Contact = () => {
   });
 
   const { username, email, message } = formData;
+
+  const isFormFilled =
+    username.length > 0 &&
+    email.length > 0 &&
+    message.length > 0 &&
+    /\S+@\S+\.\S+/.test(email);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,7 +66,6 @@ const Contact = () => {
       id: "message",
       placeholder: "Tapez votre message",
       value: message,
-      disabled: true,
     },
   ];
 
@@ -84,7 +88,9 @@ const Contact = () => {
               disabled={input.disabled}
             />
           ))}
-          <Button type="submit">Valider</Button>
+          <Button type="submit" disabled={!isFormFilled}>
+            Valider
+          </Button>
         </form>
       </div>
     </div>
