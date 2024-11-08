@@ -37,7 +37,7 @@ const Login = () => {
   ];
 
   return (
-    <div className="container mx-auto mt-3 grid gap-12">
+    <div className="container p-2 mx-auto mt-3 grid gap-12">
       <PageTitle text="Login" />
 
       <div className="flex flex-col items-start gap-2">

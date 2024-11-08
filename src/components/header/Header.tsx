@@ -28,7 +28,7 @@ const Header = () => {
           key={name}
           to={path}
           onClick={(e) => handlePreventNavigation(e, path)}
-          className={twMerge(isActivePath(path) && "text-slate-500")}
+          className={twMerge(isActivePath(path) && "font-semibold")}
         >
           {name}
         </Link>

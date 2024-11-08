@@ -12,14 +12,19 @@ export default HomePage;
 
 // form => input + button => submit => regular
 // form => input + button => submit => while typing + debounce
-// DEBOUNCE
-// i18
+
+// debounce
 // tooltip
 // tabs
+// loader
+
 // useTransition
 // <Suspense />
 // useLayoutEffect
+
+// i18
 // Redux
 // Zustand
+// useQuery
 
 // REACT 19
