@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { useToastContext } from "../../context/ToastContext";
-import { Toast as ToastType } from "../../types/types";
+import { ToastType } from "../../types/types";
 
 import ToastProgress from "./ToastProgress";
 
 const TOAST_DURATION = 5;
 
-const toastType = {
+const toastVariant = {
   success: "bg-emerald-300",
   error: "bg-yellow-200",
   danger: "bg-red-300",
@@ -45,7 +45,7 @@ const Toast = ({ toast }: ToastProps) => {
       className={twMerge(
         "min-w-60 border border-slate-900 bg-sky-300 rounded-md overflow-clip animate-slide-in-from-right peer/toast",
         discardAnimation && "animate-slide-out-to-right",
-        toast.type && toastType[toast.type]
+        toast.type && toastVariant[toast.type]
       )}
     >
       <div className="flex justify-between p-3">
