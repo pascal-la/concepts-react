@@ -5,6 +5,7 @@ import { InputWithLabelProps } from "../types/types";
 import Button from "../components/Button";
 import InputWithLabel from "../components/input/InputWithLabel";
 import PageTitle from "../components/PageTitle";
+import { useToastContext } from "../context/ToastContext";
 
 type FormData = {
   username: string;
@@ -13,6 +14,7 @@ type FormData = {
 };
 
 const Contact = () => {
+  const { addToast } = useToastContext();
   const [formData, setFormData] = useState<FormData>({
     username: "",
     email: "",
@@ -29,6 +31,11 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    addToast({
+      id: Date.now(),
+      message: "Ton message a été envoyé !",
+      type: "success",
+    });
     console.log("FORMDATA", formData);
   };
 
@@ -72,7 +79,7 @@ const Contact = () => {
   return (
     <div className="container mx-auto grid gap-12">
       <PageTitle text="Contact" />
-      <div className="mx-auto max-w-xl w-full p-12 border rounded-md">
+      <div className="mx-auto max-w-xl w-full p-12 bg-slate-100 border rounded-md">
         <form onSubmit={handleSubmit} className="grid gap-5">
           {inputs.map((input, i) => (
             <InputWithLabel
