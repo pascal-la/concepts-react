@@ -13,17 +13,20 @@ export type InputFieldType =
   | "search"
   | "number";
 
-export type InputType = {
+export type InputProps = {
   type?: InputFieldType;
   id: string;
   name: string;
   placeholder: string;
   value?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
-  inputClassName?: string;
+  className?: string;
+  required?: boolean;
+  disabled?: boolean;
 };
 
-export type InputWithLabelType = InputType & {
+export type InputWithLabelProps = Omit<InputProps, "className"> & {
   label: string;
   labelClassName?: string;
+  inputClassName?: string;
 };

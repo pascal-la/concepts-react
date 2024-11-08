@@ -1,51 +1,67 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
-import { InputWithLabelType } from "../types/types";
+import { InputWithLabelProps } from "../types/types";
 
+import Button from "../components/Button";
 import InputWithLabel from "../components/input/InputWithLabel";
 import PageTitle from "../components/PageTitle";
+import Input from "../components/input/Input";
+
+type FormData = {
+  username: string;
+  email: string;
+  message: string;
+};
 
 const Contact = () => {
-  function search(e: React.FormEvent<HTMLFormElement>) {
+  const [formData, setFormData] = useState<FormData>({
+    username: "",
+    email: "",
+    message: "",
+  });
+
+  const { username, email, message } = formData;
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const query = formData.get("query");
-    console.log(query);
-  }
+    console.log("FORMDATA", formData);
+  };
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [description, setDescription] = useState("");
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
 
-  const inputs: InputWithLabelType[] = [
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const inputs: InputWithLabelProps[] = [
     {
-      label: "Username",
+      label: "Nom d'utilisateur",
       name: "username",
       id: "username",
-      placeholder: "Username",
+      placeholder: "Entrez votre pseudo",
       value: username,
-      onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-        setUsername(e.target.value),
     },
     {
-      label: "Email",
+      label: "E-mail",
       type: "email",
       name: "email",
       id: "email",
-      placeholder: "Email",
+      placeholder: "Entrez votre e-mail",
       value: email,
-      onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-        setEmail(e.target.value),
     },
     {
-      label: "Description",
+      label: "Message",
       type: "textarea",
-      name: "description",
-      id: "description",
-      placeholder: "Description",
-      value: description,
-      onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-        setDescription(e.target.value),
+      name: "message",
+      id: "message",
+      placeholder: "Tapez votre message",
+      value: message,
+      disabled: true,
     },
   ];
 
@@ -53,7 +69,7 @@ const Contact = () => {
     <div className="container mx-auto grid gap-12">
       <PageTitle text="Contact" />
       <div className="mx-auto max-w-xl w-full p-12 border rounded-md">
-        <form onSubmit={search} className="grid gap-5">
+        <form onSubmit={handleSubmit} className="grid gap-5">
           {inputs.map((input, i) => (
             <InputWithLabel
               key={i}
@@ -63,11 +79,12 @@ const Contact = () => {
               name={input.name}
               placeholder={input.placeholder}
               value={input.value}
-              onChange={input.onChange}
+              onChange={handleInputChange}
+              required
+              disabled={input.disabled}
             />
           ))}
-
-          <button type="submit">Search</button>
+          <Button type="submit">Valider</Button>
         </form>
       </div>
     </div>

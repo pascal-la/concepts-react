@@ -1,14 +1,15 @@
 import { twMerge } from "tailwind-merge";
 
-import { InputWithLabelType } from "../../types/types";
+import { InputWithLabelProps } from "../../types/types";
 
 import Input from "./Input";
 
 const InputWithLabel = ({
   label,
   labelClassName,
+  inputClassName,
   ...props
-}: InputWithLabelType) => {
+}: InputWithLabelProps) => {
   return (
     <fieldset className="grid gap-1">
       <label
@@ -20,7 +21,7 @@ const InputWithLabel = ({
       >
         {label}
       </label>
-      <Input {...props} />
+      <Input {...props} className={inputClassName} />
     </fieldset>
   );
 };
