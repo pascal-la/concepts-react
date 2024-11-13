@@ -7,6 +7,7 @@ const links = [
   { name: "Contact", path: "/contact" },
   { name: "CountUp", path: "/count-up" },
   { name: "Blog", path: "/blog" },
+  { name: "Drag", path: "/drag" },
 ];
 
 const Header = () => {

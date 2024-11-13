@@ -8,6 +8,7 @@ import App from "./App";
 import Blog from "./pages/blog";
 import Contact from "./pages/contact";
 import CountUp from "./pages/count-up";
+import Drag from "./pages/drag";
 import Login from "./pages/login";
 import ErrorPage from "./routes/error-page";
 import Root from "./routes/root";
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/count-up",
         element: <CountUp />,
+      },
+      {
+        path: "/drag",
+        element: <Drag />,
       },
     ],
   },
