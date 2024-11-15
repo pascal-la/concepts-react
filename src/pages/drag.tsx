@@ -20,27 +20,32 @@ const cardList: CardType[] = [
   { id: 8, title: "Card 8", status: "done" },
 ];
 
+const columns = ["todo", "done"];
+
 const Drag = () => {
   const [selectedItem, setSelectedItem] = useState<CardType | null>(null);
   const [cards, setCards] = useState<CardType[]>(cardList);
-  const [test, setTest] = useState("");
+  const [test, setTest] = useState<CardStatus | null>(null);
 
   const onDragStart = (item: CardType) => {
     setSelectedItem(item);
   };
 
   const onDrop = (status: CardStatus) => {
+    // setCards((prev) =>
+    //   prev.map((card) =>
+    //     card.id === selectedItem?.id ? { ...card, status } : card
+    //   )
+    // );
     if (selectedItem) {
-      setCards((prevCards) =>
-        prevCards.map((card) =>
-          card.id === selectedItem.id ? { ...card, status } : card
-        )
-      );
-      setSelectedItem(null);
+      setCards((prev) => [
+        ...prev.filter((c) => c.id !== selectedItem.id),
+        { ...selectedItem, status },
+      ]);
     }
+    setSelectedItem(null);
+    setTest(null);
   };
-
-  const containers = ["todo", "done"];
 
   return (
     <div className="container m-auto">
@@ -51,16 +56,17 @@ const Drag = () => {
       </div>
 
       <div className="flex">
-        {containers.map((status) => (
+        {columns.map((status) => (
           <div
+            key={status}
             className={twMerge(
-              "p-5 w-full",
+              "p-5 w-full transition-all",
               status === "todo" && "bg-red-300",
               status === "done" && "bg-emerald-300",
               test === status && "opacity-70"
             )}
             onDragOver={(e) => e.preventDefault()}
-            onDragEnter={() => setTest(status)}
+            onDragEnter={() => setTest(status as CardStatus | null)}
             onDrop={() => onDrop(status as CardStatus)}
           >
             {cards.map((card) => {

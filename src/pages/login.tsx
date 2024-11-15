@@ -4,6 +4,32 @@ import { capitalize } from "../utils/stringUtils";
 
 import PageTitle from "../components/PageTitle";
 
+const customToasts = [
+  {
+    text: "Permanent",
+    element: (
+      <div>
+        <span className="text-red-500">I am a custom element</span>
+        <div>And I'm staying FOREVER!!!</div>
+      </div>
+    ),
+    isPermanent: true,
+    type: "error",
+  },
+  {
+    text: "Custom",
+    element: <div className="text-blue-500">I am a custom element</div>,
+    duration: 10,
+    type: "success",
+  },
+  {
+    text: "Message",
+    message: "This is the message only",
+    duration: 15,
+    type: "danger",
+  },
+];
+
 const Login = () => {
   const { addToast } = useToastContext();
 
@@ -18,7 +44,7 @@ const Login = () => {
   // setMessages((prev) => [...prev, { id: Date.now(), message: msg }]);
   // };
 
-  const toasts = [
+  const toasts: any = [
     {
       text: capitalize("la famille avant l'oseille"),
       message: "l'oseille avant les salopes.",
@@ -41,22 +67,19 @@ const Login = () => {
       <PageTitle text="Login" />
 
       <div className="flex flex-col items-start gap-2">
-        {toasts.map((toast, i) => {
-          const { text, message, type } = toast;
-
+        {[...toasts, ...customToasts].map((toast, i) => {
           return (
             <div
               key={i}
               onClick={() =>
                 addToast({
-                  id: Date.now(),
-                  message,
-                  type: type as ToastVariantType,
+                  ...toast,
+                  id: toast.id || Date.now(),
                 })
               }
-              className="p-2 border border-slate-800 rounded-md cursor-pointer transition-all duration-100 ease-in-out hover:bg-slate-200"
+              className="p-2 border border-slate-800 bg-emerald-200 rounded-md cursor-pointer transition-all duration-100 ease-in-out hover:opacity-60"
             >
-              {text}
+              {toast.text}
             </div>
           );
         })}

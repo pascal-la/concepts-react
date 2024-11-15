@@ -1,11 +1,18 @@
+import { ReactNode } from "react";
+
 export type ToastVariantType = "success" | "error" | "danger";
 
 export type ToastType = {
   id: number;
-  message: string;
   type?: ToastVariantType;
-  duration?: number;
-};
+} & (
+  | { duration?: number; isPermanent?: never }
+  | { duration?: never; isPermanent?: boolean }
+) &
+  (
+    | { message: string; element?: ReactNode }
+    | { message?: string; element: ReactNode }
+  );
 
 export type InputFieldType =
   | "text"

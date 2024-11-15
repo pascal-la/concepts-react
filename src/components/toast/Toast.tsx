@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { createElement, Fragment, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { useToastContext } from "../../context/ToastContext";
@@ -19,48 +19,64 @@ type ToastProps = {
 };
 
 const Toast = ({ toast }: ToastProps) => {
-  const { onDiscardToast } = useToastContext();
+  const { id, type, message, element, duration, isPermanent } = toast;
+  const { discardToast } = useToastContext();
 
   const [discardAnimation, setDiscardAnimation] = useState<boolean>(false);
 
-  const toastDuration = toast.duration || TOAST_DURATION;
+  const toastDuration = isPermanent ? null : duration || TOAST_DURATION;
 
-  const discardToast = (id: number) => {
+  const onDiscardToast = (id: number) => {
     setDiscardAnimation(true);
-    onDiscardToast(id);
+    discardToast(id);
   };
 
   useEffect(() => {
-    const timeout = setTimeout(
-      () => discardToast(toast.id),
-      toastDuration * 1000
-    );
+    if (toastDuration) {
+      const timeout = setTimeout(
+        () => onDiscardToast(id),
+        toastDuration * 1000
+      );
 
-    return () => clearTimeout(timeout);
-  }, [toast.id, toastDuration]); // eslint-disable-line react-hooks/exhaustive-deps
+      return () => clearTimeout(timeout);
+    }
+  }, [id, toastDuration]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const toastContent = () => {
+    const shouldWrapInDiv = !!message && !!element;
+
+    return createElement(
+      shouldWrapInDiv ? "div" : Fragment,
+      null,
+      message && <span>{message}</span>,
+      element
+    );
+  };
 
   return (
     <div
-      key={toast.id}
+      key={id}
       className={twMerge(
         "min-w-60 border border-slate-900 bg-sky-300 rounded-md overflow-clip animate-slide-in-from-right peer/toast",
         discardAnimation && "animate-slide-out-to-right",
-        toast.type && toastVariant[toast.type]
+        type && toastVariant[type]
       )}
     >
       <div className="flex justify-between p-3">
-        {toast.message}
+        {toastContent()}
         <span
           className="flex items-start cursor-pointer"
-          onClick={() => discardToast(toast.id)}
+          onClick={() => onDiscardToast(id)}
         >
           x
         </span>
       </div>
-      <ToastProgress
-        duration={toastDuration}
-        className="peer-hover/toast:[animation-play-state:paused]"
-      />
+      {toastDuration && (
+        <ToastProgress
+          duration={toastDuration}
+          className="peer-hover/toast:[animation-play-state:paused]"
+        />
+      )}
     </div>
   );
 };

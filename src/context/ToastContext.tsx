@@ -9,7 +9,7 @@ const ANIMATION_DURATION = 290;
 type ToastProviderProps = {
   toasts: ToastType[];
   addToast: (toast: ToastType) => void;
-  onDiscardToast: (id: number) => void;
+  discardToast: (id: number) => void;
 };
 
 const ToastContext = createContext<ToastProviderProps | undefined>(undefined);
@@ -34,11 +34,10 @@ const ToastProvider = ({ children }: { children: React.ReactNode }) => {
   const [toasts, setToasts] = useState<ToastType[]>(defaultToasts);
 
   const addToast = (toast: ToastType) => {
-    const { id, message, type, duration } = toast;
-    setToasts((prev) => [...prev, { id, message, type, duration }]);
+    setToasts((prev) => [...prev, toast]);
   };
 
-  const onDiscardToast = (id: number) => {
+  const discardToast = (id: number) => {
     setTimeout(() => {
       setToasts((prev) => prev.filter((p) => p.id !== id));
     }, ANIMATION_DURATION);
@@ -48,7 +47,7 @@ const ToastProvider = ({ children }: { children: React.ReactNode }) => {
     () => ({
       toasts,
       addToast,
-      onDiscardToast,
+      discardToast,
     }),
     [toasts]
   );
